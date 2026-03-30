@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Critic</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    .hidden { display: none !important; }
+    .mini-note {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+    .lock-card {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      background: rgba(255,255,255,0.03);
+    }
+    .lock-card h3 {
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+    .blurred {
+      position: relative;
+      filter: blur(5px);
+      pointer-events: none;
+      user-select: none;
+    }
+    .locked-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      background: rgba(9, 15, 29, 0.72);
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      font-weight: 700;
+    }
+    .relative {
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <h1>Website Critic</h1>
+      <p>
+        Get a fast homepage conversion score, one major issue, then unlock the full visual audit.
+      </p>
+    </div>
+
+    <div class="card">
+      <form id="auditForm" class="form-grid">
+        <div class="row">
+          <div>
+            <label for="url">Website URL</label>
+            <input id="url" type="url" placeholder="https://example.com" required />
+          </div>
+          <div>
+            <label for="businessType">Business Type</label>
+            <input id="businessType" type="text" placeholder="Spa, roofer, landscaping..." />
+          </div>
+          <div>
+            <label for="goal">Main Goal</label>
+            <input id="goal" type="text" placeholder="More calls, leads, bookings..." />
+          </div>
+        </div>
+
+        <div>
+          <label for="extraContext">Extra context</label>
+          <textarea id="extraContext" placeholder="Example: weak trust, low bookings, cluttered page, no clear offer..."></textarea>
+        </div>
+
+        <button id="auditBtn" type="submit">Get Free Website Score</button>
+      </form>
+
+      <div id="status" class="status"></div>
+
+      <div id="teaserSection" class="results hidden">
+        <div class="top-grid">
+          <div class="panel">
+            <h2>Homepage Screenshot</h2>
+            <div class="preview-box">
+              <img id="previewImage" alt="Website screenshot preview" />
+            </div>
+          </div>
+
+          <div class="panel">
+            <h2>Your Free Snapshot</h2>
+            <div class="score-pill">
+              <span>Conversion Score</span>
+              <strong id="score">--/10</strong>
+            </div>
+            <p id="summary" class="summary"></p>
+            <div class="kpis">
+              <div class="kpi">
+                <span>Clarity</span>
+                <strong id="clarity">--</strong>
+              </div>
+              <div class="kpi">
+                <span>Trust</span>
+                <strong id="trust">--</strong>
+              </div>
+              <div class="kpi">
+                <span>CTA</span>
+                <strong id="cta">--</strong>
+              </div>
+              <div class="kpi">
+                <span>Offer</span>
+                <strong id="offer">--</strong>
+              </div>
+            </div>
+            <p class="mini-note">You’re only seeing the score, summary, and top issue below. Enter your info to unlock the full audit.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel">
+            <h3>Top Issue Found</h3>
+            <ul id="topIssue"></ul>
+          </div>
+
+          <div class="lock-card">
+            <h3>Unlock the Full Review</h3>
+            <p class="mini-note">Get the full breakdown, fixes, trust notes, rewrite ideas, and fast wins.</p>
+            <div id="leadForm" class="form-grid">
+              <div class="row">
+                <div>
+                  <label for="name">Name</label>
+                  <input id="name" type="text" placeholder="John Smith" required />
+                </div>
+                <div>
+                  <label for="email">Email</label>
+                  <input id="email" type="email" placeholder="john@example.com" required />
+                </div>
+                <div>
+                  <label for="phone">Phone</label>
+                  <input id="phone" type="tel" placeholder="(555) 555-5555" />
+                </div>
+              </div>
+              <button id="unlockBtn" type="button">Unlock Full Audit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="lockedPreview" class="results hidden">
+        <div class="grid-2">
+          <div class="panel relative">
+            <div class="blurred">
+              <h3>Best Fixes First</h3>
+              <ul>
+                <li>Example fix hidden until unlock</li>
+                <li>Example fix hidden until unlock</li>
+                <li>Example fix hidden until unlock</li>
+              </ul>
+            </div>
+            <div class="locked-overlay">Unlock the full audit to see fixes, trust notes, rewrites, and quick wins.</div>
+          </div>
+
+          <div class="panel relative">
+            <div class="blurred">
+              <h3>Trust & Friction Notes</h3>
+              <ul>
+                <li>Example trust note hidden until unlock</li>
+                <li>Example trust note hidden until unlock</li>
+                <li>Example trust note hidden until unlock</li>
+              </ul>
+            </div>
+            <div class="locked-overlay">Lead capture comes before the full report. Don’t give away the whole thing for free.</div>
+          </div>
+        </div>
+      </div>
+
+      <div id="fullResults" class="results hidden">
+        <div class="grid-2">
+          <div class="panel">
+            <h3>What’s Hurting Conversions</h3>
+            <ul id="issues"></ul>
+          </div>
+
+          <div class="panel">
+            <h3>Best Fixes First</h3>
+            <ul id="fixes"></ul>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel">
+            <h3>Above-the-Fold Notes</h3>
+            <ul id="aboveFold"></ul>
+          </div>
+
+          <div class="panel">
+            <h3>Trust & Friction Notes</h3>
+            <ul id="trustNotes"></ul>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel">
+            <h3>Rewrite Ideas</h3>
+            <ul id="rewrites"></ul>
+          </div>
+
+          <div class="panel">
+            <h3>Fast Wins</h3>
+            <ul id="quickWins"></ul>
+          </div>
+        </div>
+      </div>
+
+      <p class="footer-note">
+        This analyzes the homepage only. Some JavaScript-heavy sites or bot-protected sites may fail or return thin data.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const auditForm = document.getElementById("auditForm");
+    const auditBtn = document.getElementById("auditBtn");
+    const unlockBtn = document.getElementById("unlockBtn");
+    const statusEl = document.getElementById("status");
+
+    const teaserSection = document.getElementById("teaserSection");
+    const lockedPreview = document.getElementById("lockedPreview");
+    const fullResults = document.getElementById("fullResults");
+
+    const previewImage = document.getElementById("previewImage");
+    const scoreEl = document.getElementById("score");
+    const summaryEl = document.getElementById("summary");
+    const clarityEl = document.getElementById("clarity");
+    const trustEl = document.getElementById("trust");
+    const ctaEl = document.getElementById("cta");
+    const offerEl = document.getElementById("offer");
+    const topIssueEl = document.getElementById("topIssue");
+
+    const issuesEl = document.getElementById("issues");
+    const fixesEl = document.getElementById("fixes");
+    const aboveFoldEl = document.getElementById("aboveFold");
+    const trustNotesEl = document.getElementById("trustNotes");
+    const rewritesEl = document.getElementById("rewrites");
+    const quickWinsEl = document.getElementById("quickWins");
+
+    let cachedAudit = null;
+    let cachedPayload = null;
+
+    function fillList(el, items) {
+      el.innerHTML = "";
+      (items || []).forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        el.appendChild(li);
+      });
+    }
+
+    function hideAllResults() {
+      teaserSection.classList.add("hidden");
+      teaserSection.classList.remove("show");
+      lockedPreview.classList.add("hidden");
+      lockedPreview.classList.remove("show");
+      fullResults.classList.add("hidden");
+      fullResults.classList.remove("show");
+    }
+
+    function showTeaser(data) {
+      cachedAudit = data.audit;
+
+      previewImage.src = data.screenshotDataUrl;
+      scoreEl.textContent = `${data.audit.score}/10`;
+      summaryEl.textContent = data.audit.summary;
+      clarityEl.textContent = data.audit.subscores.clarity;
+      trustEl.textContent = data.audit.subscores.trust;
+      ctaEl.textContent = data.audit.subscores.cta;
+      offerEl.textContent = data.audit.subscores.offer;
+      fillList(topIssueEl, data.audit.issues?.slice(0, 1) || []);
+
+      teaserSection.classList.remove("hidden");
+      teaserSection.classList.add("show");
+      lockedPreview.classList.remove("hidden");
+      lockedPreview.classList.add("show");
+    }
+
+    function showFullAudit() {
+      if (!cachedAudit) return;
+
+      fillList(issuesEl, cachedAudit.issues || []);
+      fillList(fixesEl, cachedAudit.fixes || []);
+      fillList(aboveFoldEl, cachedAudit.aboveTheFold || []);
+      fillList(trustNotesEl, cachedAudit.trustAndFriction || []);
+      fillList(rewritesEl, cachedAudit.rewrites || []);
+      fillList(quickWinsEl, cachedAudit.quickWins || []);
+
+      lockedPreview.classList.add("hidden");
+      lockedPreview.classList.remove("show");
+      fullResults.classList.remove("hidden");
+      fullResults.classList.add("show");
+    }
+
+    auditForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      cachedPayload = {
+        url: document.getElementById("url").value.trim(),
+        businessType: document.getElementById("businessType").value.trim(),
+        goal: document.getElementById("goal").value.trim(),
+        extraContext: document.getElementById("extraContext").value.trim()
+      };
+
+      auditBtn.disabled = true;
+      hideAllResults();
+      statusEl.className = "status";
+      statusEl.textContent = "Running free website score...";
+
+      try {
+        const res = await fetch("/api/critique", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(cachedPayload)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Audit failed.");
+        }
+
+        showTeaser(data);
+        statusEl.textContent = "Free score ready. Enter your info to unlock the full audit.";
+      } catch (err) {
+        statusEl.className = "status error";
+        statusEl.textContent = err.message || "Something broke.";
+      } finally {
+        auditBtn.disabled = false;
+      }
+    });
+
+    unlockBtn.addEventListener("click", async () => {
+      if (!cachedPayload || !cachedAudit) {
+        statusEl.className = "status error";
+        statusEl.textContent = "Run the free score first.";
+        return;
+      }
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+
+      if (!name || !email) {
+        statusEl.className = "status error";
+        statusEl.textContent = "Name and email are required.";
+        return;
+      }
+
+      unlockBtn.disabled = true;
+      statusEl.className = "status";
+      statusEl.textContent = "Saving your lead and unlocking full audit...";
+
+      const leadPayload = {
+        ...cachedPayload,
+        name,
+        email,
+        phone,
+        critiqueScore: cachedAudit.score,
+        followUpMessage: ""
+      };
+
+      try {
+        const leadRes = await fetch("/api/log-lead-supabase", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(leadPayload)
+        });
+
+        const leadData = await leadRes.json();
+
+        if (!leadRes.ok) {
+          throw new Error(leadData.error || "Lead save failed.");
+        }
+
+        showFullAudit();
+        statusEl.textContent = "Full audit unlocked.";
+      } catch (err) {
+        statusEl.className = "status error";
+        statusEl.textContent = err.message || "Something broke.";
+      } finally {
+        unlockBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
