@@ -3,102 +3,127 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Website Critic</title>
-  <link rel="stylesheet" href="/styles.css" />
-  <style>
-    .hidden { display: none !important; }
-    .mini-note {
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.45;
-    }
-    .lock-card {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 16px;
-      background: rgba(255,255,255,0.03);
-    }
-    .lock-card h3 {
-      margin-top: 0;
-      margin-bottom: 8px;
-    }
-    .blurred {
-      position: relative;
-      filter: blur(5px);
-      pointer-events: none;
-      user-select: none;
-    }
-    .locked-overlay {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 20px;
-      background: rgba(9, 15, 29, 0.72);
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      font-weight: 700;
-    }
-    .relative {
-      position: relative;
-    }
-  </style>
+  <title>Website Critic | Conversion Audit</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="wrap">
-    <div class="hero">
-      <h1>Website Critic</h1>
-      <p>
-        Get a fast homepage conversion score, one major issue, then unlock the full visual audit.
-      </p>
-    </div>
+  <div class="site-shell">
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
 
-    <div class="card">
-      <form id="auditForm" class="form-grid">
-        <div class="row">
-          <div>
-            <label for="url">Website URL</label>
-            <input id="url" type="url" placeholder="https://example.com" required />
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">WC</div>
+        <span>Website Critic</span>
+      </div>
+      <div class="topbar-note">Homepage conversion audit + optional $99 fix</div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero">
+        <div class="eyebrow">SaaS-style website conversion audit</div>
+        <h1>
+          Find what’s costing you leads
+          <span>before your visitors leave</span>
+        </h1>
+        <p class="hero-copy">
+          Get a fast homepage score, see the biggest issue hurting conversions,
+          and unlock the full audit with prioritized fixes, trust notes, and quick wins.
+        </p>
+
+        <div class="hero-points">
+          <div class="hero-point">
+            <span class="dot"></span>
+            Instant score
           </div>
-          <div>
-            <label for="businessType">Business Type</label>
-            <input id="businessType" type="text" placeholder="Spa, roofer, landscaping..." />
+          <div class="hero-point">
+            <span class="dot"></span>
+            1 key problem surfaced immediately
           </div>
-          <div>
-            <label for="goal">Main Goal</label>
-            <input id="goal" type="text" placeholder="More calls, leads, bookings..." />
+          <div class="hero-point">
+            <span class="dot"></span>
+            $99 implementation option
           </div>
         </div>
+      </section>
 
-        <div>
-          <label for="extraContext">Extra context</label>
-          <textarea id="extraContext" placeholder="Example: weak trust, low bookings, cluttered page, no clear offer..."></textarea>
+      <section class="card card-form">
+        <div class="section-head">
+          <div>
+            <p class="section-kicker">Start free</p>
+            <h2>Run your homepage audit</h2>
+          </div>
+          <p class="section-copy">
+            Fast, focused, and built to show what matters most for conversions.
+          </p>
         </div>
 
-        <button id="auditBtn" type="submit">Get Free Website Score</button>
-      </form>
+        <form id="auditForm" class="form-grid">
+          <div class="row row-3">
+            <div class="field">
+              <label for="url">Website URL</label>
+              <input id="url" type="url" placeholder="https://example.com" required />
+            </div>
+            <div class="field">
+              <label for="businessType">Business Type</label>
+              <input id="businessType" type="text" placeholder="Roofer, med spa, law firm..." />
+            </div>
+            <div class="field">
+              <label for="goal">Main Goal</label>
+              <input id="goal" type="text" placeholder="More calls, leads, bookings..." />
+            </div>
+          </div>
 
-      <div id="status" class="status"></div>
+          <div class="field">
+            <label for="extraContext">Extra context</label>
+            <textarea
+              id="extraContext"
+              placeholder="Example: weak trust, low bookings, cluttered page, no clear offer, poor mobile flow..."
+            ></textarea>
+          </div>
 
-      <div id="teaserSection" class="results hidden">
+          <div class="form-actions">
+            <button id="auditBtn" type="submit" class="btn btn-primary">
+              Get Free Website Score
+            </button>
+            <p class="form-note">
+              Free snapshot first. Full audit unlock comes after lead capture.
+            </p>
+          </div>
+        </form>
+
+        <div id="status" class="status"></div>
+      </section>
+
+      <section id="teaserSection" class="results hidden">
         <div class="top-grid">
-          <div class="panel">
-            <h2>Homepage Screenshot</h2>
+          <div class="card panel screenshot-card">
+            <div class="panel-head">
+              <p class="section-kicker">Visual capture</p>
+              <h3>Homepage Screenshot</h3>
+            </div>
             <div class="preview-box">
               <img id="previewImage" alt="Website screenshot preview" />
             </div>
           </div>
 
-          <div class="panel">
-            <h2>Your Free Snapshot</h2>
-            <div class="score-pill">
-              <span>Conversion Score</span>
-              <strong id="score">--/10</strong>
+          <div class="card panel score-panel">
+            <div class="panel-head">
+              <p class="section-kicker">Free snapshot</p>
+              <h3>Your score at a glance</h3>
             </div>
-            <p id="summary" class="summary"></p>
+
+            <div class="score-stage">
+              <div class="score-ring">
+                <div class="score-ring-inner">
+                  <span class="score-label">Score</span>
+                  <strong id="score">--/10</strong>
+                </div>
+              </div>
+
+              <p id="summary" class="summary"></p>
+            </div>
+
             <div class="kpis">
               <div class="kpi">
                 <span>Clarity</span>
@@ -117,136 +142,180 @@
                 <strong id="offer">--</strong>
               </div>
             </div>
-            <p class="mini-note">You’re only seeing the score, summary, and top issue below. Enter your info to unlock the full audit.</p>
+
+            <p class="mini-note">
+              You’re seeing the score, summary, and biggest issue first.
+              Unlock the full audit for fixes, rewrites, trust notes, and fast wins.
+            </p>
           </div>
         </div>
 
         <div class="grid-2">
-          <div class="panel">
-            <h3>Top Issue Found</h3>
-            <ul id="topIssue"></ul>
+          <div class="card panel">
+            <div class="panel-head">
+              <p class="section-kicker">Primary problem</p>
+              <h3>Top Issue Found</h3>
+            </div>
+            <ul id="topIssue" class="clean-list"></ul>
           </div>
 
-          <div class="lock-card">
-            <h3>Unlock the Full Review</h3>
-            <p class="mini-note">Get the full breakdown, fixes, trust notes, rewrite ideas, and fast wins.</p>
+          <div class="card lock-card">
+            <div class="offer-badge subtle-metal">Unlock Full Audit</div>
+            <h3>Get the full breakdown</h3>
+            <p class="mini-note">
+              See prioritized fixes, friction points, copy rewrite ideas, and fast conversion wins.
+            </p>
+
             <div id="leadForm" class="form-grid">
-              <div class="row">
-                <div>
+              <div class="row row-3">
+                <div class="field">
                   <label for="name">Name</label>
                   <input id="name" type="text" placeholder="John Smith" required />
                 </div>
-                <div>
+                <div class="field">
                   <label for="email">Email</label>
                   <input id="email" type="email" placeholder="john@example.com" required />
                 </div>
-                <div>
+                <div class="field">
                   <label for="phone">Phone</label>
                   <input id="phone" type="tel" placeholder="(555) 555-5555" />
                 </div>
               </div>
-              <button id="unlockBtn" type="button">Unlock Full Audit</button>
+
+              <div class="form-actions">
+                <button id="unlockBtn" type="button" class="btn btn-primary">
+                  Unlock Full Audit
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div id="lockedPreview" class="results hidden">
+      <section id="lockedPreview" class="results hidden">
         <div class="grid-2">
-          <div class="panel relative">
+          <div class="card panel relative">
             <div class="blurred">
-              <h3>Best Fixes First</h3>
-              <ul>
+              <div class="panel-head">
+                <p class="section-kicker">Hidden preview</p>
+                <h3>Best Fixes First</h3>
+              </div>
+              <ul class="clean-list">
                 <li>Example fix hidden until unlock</li>
                 <li>Example fix hidden until unlock</li>
                 <li>Example fix hidden until unlock</li>
               </ul>
             </div>
-            <div class="locked-overlay">Unlock the full audit to see fixes, trust notes, rewrites, and quick wins.</div>
+            <div class="locked-overlay">
+              Unlock the full audit to see fixes, trust notes, rewrites, and quick wins.
+            </div>
           </div>
 
-          <div class="panel relative">
+          <div class="card panel relative">
             <div class="blurred">
-              <h3>Trust & Friction Notes</h3>
-              <ul>
+              <div class="panel-head">
+                <p class="section-kicker">Hidden preview</p>
+                <h3>Trust & Friction Notes</h3>
+              </div>
+              <ul class="clean-list">
                 <li>Example trust note hidden until unlock</li>
                 <li>Example trust note hidden until unlock</li>
                 <li>Example trust note hidden until unlock</li>
               </ul>
             </div>
-            <div class="locked-overlay">Lead capture comes before the full report. Don’t give away the whole thing for free.</div>
+            <div class="locked-overlay">
+              Don’t dump the whole report for free. Make the lead capture earn the value.
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div id="fullResults" class="results hidden">
+      <section id="fullResults" class="results hidden">
+        <div class="results-head">
+          <div>
+            <p class="section-kicker">Full audit unlocked</p>
+            <h2>Your conversion breakdown</h2>
+          </div>
+        </div>
+
         <div class="grid-2">
-          <div class="panel">
+          <div class="card panel">
             <h3>What’s Hurting Conversions</h3>
-            <ul id="issues"></ul>
+            <ul id="issues" class="clean-list"></ul>
           </div>
 
-          <div class="panel">
+          <div class="card panel">
             <h3>Best Fixes First</h3>
-            <ul id="fixes"></ul>
+            <ul id="fixes" class="clean-list"></ul>
           </div>
         </div>
 
         <div class="grid-2">
-          <div class="panel">
+          <div class="card panel">
             <h3>Above-the-Fold Notes</h3>
-            <ul id="aboveFold"></ul>
+            <ul id="aboveFold" class="clean-list"></ul>
           </div>
 
-          <div class="panel">
+          <div class="card panel">
             <h3>Trust & Friction Notes</h3>
-            <ul id="trustNotes"></ul>
+            <ul id="trustNotes" class="clean-list"></ul>
           </div>
         </div>
 
         <div class="grid-2">
-          <div class="panel">
+          <div class="card panel">
             <h3>Rewrite Ideas</h3>
-            <ul id="rewrites"></ul>
+            <ul id="rewrites" class="clean-list"></ul>
           </div>
 
-          <div class="panel">
+          <div class="card panel">
             <h3>Fast Wins</h3>
-            <ul id="quickWins"></ul>
+            <ul id="quickWins" class="clean-list"></ul>
           </div>
         </div>
-      </div>
-<section class="result-offer-card">
-  <div class="offer-badge">Recommended Fix</div>
+      </section>
 
-  <h3 class="offer-title">I can fix your top 3 for $99</h3>
+      <section class="card result-offer-card">
+        <div class="offer-topline">
+          <div class="offer-badge subtle-metal">Recommended Fix</div>
+          <div class="price-chip">$99 service</div>
+        </div>
 
-  <p class="offer-text">
-    These problems may be costing you leads every day. I can clean this up,
-    improve conversions, and make your site easier for customers to act on.
-  </p>
+        <div class="offer-grid">
+          <div>
+            <h3 class="offer-title">I can fix your top 3 conversion problems for $99</h3>
+            <p class="offer-text">
+              If your site is leaking leads because of weak CTA placement, poor mobile flow,
+              or low trust, I can clean it up fast and make it easier for visitors to act.
+            </p>
+          </div>
 
-  <ul class="offer-list">
-    <li>Clearer CTA placement</li>
-    <li>Better mobile conversion flow</li>
-    <li>Improved trust elements</li>
-    <li>Cleaner layout and lead path</li>
-  </ul>
+          <ul class="offer-list">
+            <li>Clearer CTA placement</li>
+            <li>Better mobile conversion flow</li>
+            <li>Improved trust elements</li>
+            <li>Cleaner layout and lead path</li>
+          </ul>
+        </div>
 
-  <div class="offer-actions">
-    <a href="mailto:kadengracedigital@mail.com?subject=Website Fix Request - $99" class="btn btn-primary">
-      Get my $99 fix
-    </a>
+        <div class="offer-actions">
+          <a
+            href="mailto:kadengracedigital@mail.com?subject=Website Fix Request - $99"
+            class="btn btn-primary"
+          >
+            Get My $99 Fix
+          </a>
 
-    <a href="tel:+18653094122" class="btn btn-secondary">
-      Call Me
-    </a>
-  </div>
-</section>
+          <a href="tel:+18653094122" class="btn btn-secondary">
+            Call Me
+          </a>
+        </div>
+      </section>
+
       <p class="footer-note">
-        This analyzes the homepage only. Some JavaScript-heavy sites or bot-protected sites may fail or return thin data.
+        This analyzes the homepage only. Some JavaScript-heavy or bot-protected sites may return limited data.
       </p>
-    </div>
+    </main>
   </div>
 
   <script>
@@ -289,11 +358,8 @@
 
     function hideAllResults() {
       teaserSection.classList.add("hidden");
-      teaserSection.classList.remove("show");
       lockedPreview.classList.add("hidden");
-      lockedPreview.classList.remove("show");
       fullResults.classList.add("hidden");
-      fullResults.classList.remove("show");
     }
 
     function showTeaser(data) {
@@ -309,9 +375,7 @@
       fillList(topIssueEl, data.audit.issues?.slice(0, 1) || []);
 
       teaserSection.classList.remove("hidden");
-      teaserSection.classList.add("show");
       lockedPreview.classList.remove("hidden");
-      lockedPreview.classList.add("show");
     }
 
     function showFullAudit() {
@@ -325,9 +389,7 @@
       fillList(quickWinsEl, cachedAudit.quickWins || []);
 
       lockedPreview.classList.add("hidden");
-      lockedPreview.classList.remove("show");
       fullResults.classList.remove("hidden");
-      fullResults.classList.add("show");
     }
 
     auditForm.addEventListener("submit", async (e) => {
